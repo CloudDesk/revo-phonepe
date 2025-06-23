@@ -4,7 +4,13 @@ import { query } from './postgress.js';
 const fastify = Fastify({ logger: true });
 
 fastify.get('/', async (request, reply) => {
+
   return { message: 'Hello, World!' };
+});
+
+fastify.get('/test', async (request, reply) => {
+  
+  return { message: 'test, World!' };
 });
 
 fastify.post('/helloGET', async (request : any, reply : any) => {

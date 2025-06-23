@@ -9,6 +9,9 @@ const fastify = (0, fastify_1.default)({ logger: true });
 fastify.get('/', async (request, reply) => {
     return { message: 'Hello, World!' };
 });
+fastify.get('/test', async (request, reply) => {
+    return { message: 'test, World!' };
+});
 fastify.post('/helloGET', async (request, reply) => {
     try {
         const { merchantid } = request.body;
