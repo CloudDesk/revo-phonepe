@@ -40,7 +40,7 @@ steps:
       - '--execution-environment'
       - 'gen2'
       - '--service-account'
-      - 'revo-dev-and-test@appspot.gserviceaccount.com'
+      - 'revo-test-fileupload@revo-dev-and-test.iam.gserviceaccount.com'
       - '--set-env-vars'
       - 'POSTGRES__DATABASE=${_POSTGRES__DATABASE},POSTGRES_HOST=${_POSTGRES_HOST},POSTGRES_PASSWORD=${_POSTGRES_PASSWORD},POSTGRES_PORT=${_POSTGRES_PORT},POSTGRES_USER=${_POSTGRES_USER}'
 
