@@ -1,0 +1,56 @@
+steps:
+
+  # Step 1: Set GCP project
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'config'
+      - 'set'
+      - 'project'
+      - 'revo-dev-and-test'
+
+  # Step 3: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/revo-dev-and-test/revo-phoenepe-uat:latest'
+      - '.'
+
+  # Step 4: Push the Docker image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/revo-dev-and-test/revo-phoenepe-uat:latest'
+
+  # Step 5: Deploy the image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'revo-phoenepe-uat'
+      - '--image'
+      - 'gcr.io/revo-dev-and-test/revo-phoenepe-uat:latest'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--execution-environment'
+      - 'gen2'
+      - '--service-account'
+      - 'revotestbackend@revo-dev-and-test.iam.gserviceaccount.com'
+      - '--set-env-vars'
+      - 'POSTGRES__DATABASE=${_POSTGRES__DATABASE},POSTGRES_HOST=${_POSTGRES_HOST},POSTGRES_PASSWORD=${_POSTGRES_PASSWORD},POSTGRES_PORT=${_POSTGRES_PORT},POSTGRES_USER=${_POSTGRES_USER}'
+
+# Substitution variables matched exactly to  env
+substitutions:
+  _POSTGRES_USER: '${POSTGRES_USER}'
+  _POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+  _POSTGRES_HOST: '${POSTGRES_HOST}'
+  _POSTGRES_PORT: '${POSTGRES_PORT}'
+  _POSTGRES__DATABASE: '${POSTGRES__DATABASE}'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
