@@ -12,6 +12,9 @@ fastify.get('/', async (request, reply) => {
 fastify.get('/test', async (request, reply) => {
     return { message: 'test, World!' };
 });
+fastify.get('/test/world', async (request, reply) => {
+    return { message: 'test, World!' };
+});
 fastify.post('/helloGET', async (request, reply) => {
     try {
         const { merchantid } = request.body;
