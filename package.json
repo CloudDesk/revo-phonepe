@@ -9,7 +9,7 @@
     "revo-phoenepe-build": "docker build -t revo-phoenepe-sit .",
     "revo-phoenepe-tag": "docker tag revo-phoenepe-sit gcr.io/revo-dev-and-test/revo-phoenepe-sit",
     "revo-phoenepe-push": "docker push gcr.io/revo-dev-and-test/revo-phoenepe-sit",
-    "revo-phoenepe-deploy": "gcloud run deploy revo-phoenepe-sit --image gcr.io/revo-dev-and-test/revo-phoenepe-sit:latest --platform managed --region us-central1 --allow-unauthenticated --port 8080 --service-account revo-dev-fileupload@revo-dev-and-test.iam.gserviceaccount.com --execution-environment gen2"
+    "revo-phoenepe-deploy": "gcloud run deploy revo-phoenepe-sit --image gcr.io/revo-dev-and-test/revo-phoenepe-sit:latest --platform managed --region us-central1 --allow-unauthenticated --port 8080 --service-account  revo-dev-phonepe@revo-dev-and-test.iam.gserviceaccount.com --execution-environment gen2"
   },
   "author": "",
   "license": "ISC",
